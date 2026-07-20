@@ -1,0 +1,114 @@
+exp_root_dir: outputs/uni3d_repa
+name: step1x3d
+tag: uni3d_repa
+seed: 0
+use_timestamp: true
+
+data_type: objaverse-datamodule
+data:
+  root_dir: data/3d_data
+  n_samples: 32768
+  align_points: 10000
+  with_sharp_data: true
+  image_indices: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+  validation_image_index: 13
+  background_color: [255, 255, 255]
+  random_flip: true
+  random_color_jitter: true
+  random_rotate: true
+  batch_size: 16
+  num_workers: 8
+
+system_type: rectified-flow-system
+system:
+  skip_validation: false
+  guidance_scale: 7.5
+  num_inference_steps: 50
+
+  shape_model_type: michelangelo-autoencoder
+  shape_model:
+    pretrained_model_name_or_path: pretrained
+    subfolder: vae/diffusion_pytorch_model.safetensors
+    n_samples: ${data.n_samples}
+    with_sharp_data: ${data.with_sharp_data}
+    use_downsample: true
+    num_latents: 2048
+    embed_dim: 64
+    point_feats: 3
+    out_dim: 1
+    num_freqs: 8
+    include_pi: false
+    heads: 12
+    width: 768
+    num_encoder_layers: 8
+    num_decoder_layers: 16
+    use_ln_post: true
+    init_scale: 0.25
+    qkv_bias: false
+    use_flash: true
+    use_checkpoint: false
+
+  visual_condition_type: dinov2-encoder
+  visual_condition:
+    pretrained_dino_name_or_path: pretrained/visual_encoder
+    encode_camera: false
+    n_views: 1
+    empty_embeds_ratio: 0.1
+    normalize_embeds: false
+    zero_uncond_embeds: true
+    image_size: 518
+
+  denoiser_model_type: flux-denoiser
+  denoiser_model:
+    input_channels: ${system.shape_model.embed_dim}
+    width: 1280
+    layers: 6
+    num_single_layers: 12
+    num_heads: 20
+    use_visual_condition: true
+    visual_condition_dim: 1024
+    s_encoder_depth: 6
+
+  align_model_type: uni3d-align
+  align_model:
+    config_path: configs/uni3d_g.json
+    projector_dim: 2048
+    z_size: 1024
+    n_points: ${data.align_points}
+  alignment_start_epoch: 3
+  alignment_token_count: 512
+  matcher: gpu
+
+  noise_scheduler_type: diffusers.schedulers.FlowMatchEulerDiscreteScheduler
+  noise_scheduler:
+    num_train_timesteps: 1000
+  denoise_scheduler_type: diffusers.schedulers.FlowMatchEulerDiscreteScheduler
+  denoise_scheduler:
+    num_train_timesteps: 1000
+
+  loss:
+    lambda_diffusion: 1.0
+    lambda_proj: 0.5
+    lambda_opt: 0.1
+  optimizer:
+    name: AdamW
+    args:
+      lr: 1.0e-3
+      betas: [0.9, 0.99]
+      eps: 1.0e-6
+
+trainer:
+  num_nodes: 1
+  max_epochs: 600
+  log_every_n_steps: 50
+  num_sanity_val_steps: 0
+  check_val_every_n_epoch: 5
+  precision: bf16-mixed
+  strategy: deepspeed_stage_2
+
+checkpoint:
+  save_last: true
+  save_top_k: -1
+  every_n_epochs: 5
+
+resume: null

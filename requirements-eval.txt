@@ -1,0 +1,4 @@
+# Additional packages needed when evaluation is run in the step1x environment.
+# The existing driveuni3d environment already provides these versions.
+open-clip-torch==2.32.0
+ftfy==6.2.3

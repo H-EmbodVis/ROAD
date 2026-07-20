@@ -1,0 +1,15 @@
+name: step1x
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - cmake
+  - ninja
+  - pytorch=2.5.1
+  - torchvision=0.20.1
+  - pytorch-cuda=11.8
+  - pip:
+      - -r requirements.txt

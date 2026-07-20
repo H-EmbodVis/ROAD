@@ -1,0 +1,12 @@
+{
+  "pc_model": "eva_giant_patch14_560",
+  "pretrained_pc": "",
+  "drop_path_rate": 0.0,
+  "patch_dropout": 0.0,
+  "num_group": 512,
+  "group_size": 64,
+  "pc_encoder_dim": 512,
+  "pc_feat_dim": 1408,
+  "embed_dim": 1024,
+  "ckpt_path": "pretrained/uni3d/model.pt"
+}

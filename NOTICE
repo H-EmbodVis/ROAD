@@ -1,0 +1,23 @@
+This project contains a reduced and modified training implementation derived
+from Step1X-3D, distributed under the Apache License 2.0.
+
+The files under training/uni3d/ and evaluation/uni3d/ are reduced and modified
+from BAAI-Vision/Uni3D. They retain the upstream MIT license in
+training/uni3d/LICENSE and evaluation/uni3d/LICENSE. The two subsets are kept
+separate for the frozen REPA training teacher and Uni3D-I evaluation.
+
+The minimal PointBERT inference implementation in evaluation/ulip_model.py is
+adapted from Salesforce/ULIP and retains the upstream BSD 3-Clause license in
+evaluation/LICENSE-ULIP.
+
+Parts of the transformer implementation are adapted from Hugging Face
+Diffusers. See source-file notices and the upstream project for details.
+
+No model weights or external datasets are distributed in this source archive.
+Their separate licenses and terms must be reviewed before redistribution. The
+synthetic cube under data/demo_3d_data is generated specifically for this
+repository and dedicated to the public domain under CC0 1.0.
+
+The ROAD overview image under assets/road3d.png and the selected conditioning
+images, textured GLBs, and renders under assets/showcase/ are distributed as
+project showcase assets under the Apache License 2.0 unless noted otherwise.
