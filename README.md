@@ -10,7 +10,7 @@
 
 <p align="center">
   Xiao Luo<sup>1</sup> &nbsp;&nbsp;
-  <a href="https://github.com/LMD0311">Mingyang Du</a><sup>1</sup> &nbsp;&nbsp;
+  <a href="https://github.com/LMD0311">Xin Zhou</a><sup>1</sup> &nbsp;&nbsp;
   Xin Zhou<sup>1</sup> &nbsp;&nbsp;
   <a href="https://github.com/jerryfeng2003">Tianrui Feng</a><sup>1</sup><br>
   Xiwu Chen<sup>2</sup> &nbsp;&nbsp;
