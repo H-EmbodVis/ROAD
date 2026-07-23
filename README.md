@@ -20,7 +20,9 @@
 </p>
 
 <p align="center">
-  <img src="assets/000.png" alt="ROAD overview" width="100%">
+  <a href="assets/000.pdf">
+    <img src="assets/000.webp" alt="ROAD overview" width="100%">
+  </a>
 </p>
 
 ROAD transfers discriminative 3D semantics into shape generation through
