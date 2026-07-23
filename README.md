@@ -1,14 +1,22 @@
 # ROAD: Reciprocal-Objective Alignment of Discriminative Semantics for 3D Shape Generation
 
 <p align="center">
+  <a href="https://github.com/LMD0311"><strong>Xin Zhou</strong></a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://github.com/jerryfeng2003"><strong>Tianrui Feng</strong></a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://github.com/dk-liang"><strong>Dingkang Liang</strong></a>
+</p>
+
+<p align="center">
   Xiao Luo<sup>1</sup> &nbsp;&nbsp;
-  Mingyang Du<sup>1</sup> &nbsp;&nbsp;
+  <a href="https://github.com/LMD0311">Mingyang Du</a><sup>1</sup> &nbsp;&nbsp;
   Xin Zhou<sup>1</sup> &nbsp;&nbsp;
-  Tianrui Feng<sup>1</sup><br>
+  <a href="https://github.com/jerryfeng2003">Tianrui Feng</a><sup>1</sup><br>
   Xiwu Chen<sup>2</sup> &nbsp;&nbsp;
   Xiaofan Li<sup>3</sup> &nbsp;&nbsp;
   Jiangning Zhang<sup>3</sup> &nbsp;&nbsp;
-  Dingkang Liang<sup>1,*</sup>
+  <a href="https://github.com/dk-liang">Dingkang Liang</a><sup>1,*</sup>
 </p>
 
 <p align="center">
@@ -41,17 +49,34 @@ The following textured GLBs are rendered as 360-degree turntables.
 
 <table>
   <tr>
-    <td align="center"><img src="assets/turntables/001.gif" width="280"><br><sub>001 · Bread man</sub></td>
-    <td align="center"><img src="assets/turntables/002.gif" width="280"><br><sub>002 · Cat</sub></td>
-    <td align="center"><img src="assets/turntables/003.gif" width="280"><br><sub>003 · Food bowl</sub></td>
+    <td align="center">
+      <img src="assets/turntables/001.gif" width="280"><br>
+      <sub>001 · Bread man</sub>
+    </td>
+    <td align="center">
+      <img src="assets/turntables/002.gif" width="280"><br>
+      <sub>002 · Cat</sub>
+    </td>
+    <td align="center">
+      <img src="assets/turntables/003.gif" width="280"><br>
+      <sub>003 · Food bowl</sub>
+    </td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/turntables/004.gif" width="280"><br><sub>004 · Fire hydrant</sub></td>
-    <td align="center"><img src="assets/turntables/005.gif" width="280"><br><sub>005 · Aircraft</sub></td>
-    <td align="center"><img src="assets/turntables/006.gif" width="280"><br><sub>006 · Castle</sub></td>
+    <td align="center">
+      <img src="assets/turntables/004.gif" width="280"><br>
+      <sub>004 · Fire hydrant</sub>
+    </td>
+    <td align="center">
+      <img src="assets/turntables/005.gif" width="280"><br>
+      <sub>005 · Aircraft</sub>
+    </td>
+    <td align="center">
+      <img src="assets/turntables/006.gif" width="280"><br>
+      <sub>006 · Castle</sub>
+    </td>
   </tr>
 </table>
-
 
 ## Installation
 
@@ -203,6 +228,7 @@ Run Uni3D-I and ULIP-I on two GPUs:
 
 ```bash
 conda activate driveuni3d
+
 GPU_IDS=0,1 bash scripts/evaluate.sh \
   evaluation_data/manifest.json \
   evaluation_data/images \
