@@ -50,7 +50,6 @@ The following textured GLBs are rendered as 360-degree turntables.
   </tr>
 </table>
 
-[Browse all 34 examples, conditioning images, and textured GLBs](assets/showcase/README.md).
 
 ## Installation
 
