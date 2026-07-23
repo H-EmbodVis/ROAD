@@ -9,7 +9,7 @@
   <a href="https://github.com/jerryfeng2003">Tianrui Feng</a><sup>1</sup><br>
   Xiwu Chen<sup>2</sup> &nbsp;&nbsp;
   Xiaofan Li<sup>3</sup> &nbsp;&nbsp;
-  Jiangning Zhang<sup>3</sup> &nbsp;&nbsp;
+  <a href="https://github.com/zhangzjn">Jiangning Zhang</a><sup>3</sup> &nbsp;&nbsp;
   <a href="https://github.com/dk-liang">Dingkang Liang</a><sup>1,*</sup>
 </p>
 
