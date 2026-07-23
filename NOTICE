@@ -18,6 +18,6 @@ Their separate licenses and terms must be reviewed before redistribution. The
 synthetic cube under data/demo_3d_data is generated specifically for this
 repository and dedicated to the public domain under CC0 1.0.
 
-The ROAD overview image under assets/road3d.png and the selected conditioning
+The ROAD overview image under assets/000.png and the selected conditioning
 images, textured GLBs, and renders under assets/showcase/ are distributed as
 project showcase assets under the Apache License 2.0 unless noted otherwise.

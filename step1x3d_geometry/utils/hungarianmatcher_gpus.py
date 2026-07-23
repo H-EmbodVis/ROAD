@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.cpp_extension import load_inline
 
-# ────────────────────────── 1. CUDA 核心实现 (基于 HA4DETR) ──────────────────────────
+# ────────────────────────── 1. CUDA core implementation (based on HA4DETR) ──────────────────────────
 CPP_STUB = r"""
 #include <torch/extension.h>
 void hungarian_launcher(torch::Tensor cost, torch::Tensor ncols, torch::Tensor assignment);
@@ -125,7 +125,7 @@ void hungarian_launcher(torch::Tensor cost, torch::Tensor ncols, torch::Tensor a
 }
 """
 
-# 编译并加载 CUDA 扩展
+# Compile and load the CUDA extension
 ext_mod = load_inline(
     name="hungarian_gpu_lib",
     cpp_sources=[CPP_STUB],
@@ -142,13 +142,13 @@ def hungarian_gpu(cost: torch.Tensor, ncols: torch.Tensor) -> torch.Tensor:
     return out
 
 
-# ────────────────────────── 2. 封装后的损失计算类 ──────────────────────────
+# ────────────────────────── 2. Wrapped loss computation class ──────────────────────────
 
 class HungarianMatcherWithLossGPU(nn.Module):
     def __init__(self, cost_cosine: float = 1.0):
         super().__init__()
         self.cost_cosine = cost_cosine
-        # 对应 CUDA 代码中的常量限制
+        # Constant limits matching the CUDA code
         self._MAX_ROWS = 1369
         self._MAX_COLS = 1369
 
@@ -161,31 +161,31 @@ class HungarianMatcherWithLossGPU(nn.Module):
         T2 = features2.shape[1]
         device = features1.device
 
-        # 1. 计算余弦相似度成本 [B, T1, T2]
+        # 1. Compute the cosine similarity cost [B, T1, T2]
         f1_n = F.normalize(features1, p=2, dim=-1)
         f2_n = F.normalize(features2, p=2, dim=-1)
         sim = torch.bmm(f1_n, f2_n.transpose(1, 2))
         cost = self.cost_cosine * (1.0 - sim)
 
-        # 2. 构造符合 CUDA 要求的固定尺寸填充矩阵
-        # 成本初始化为极大值 INF
+        # 2. Build a fixed-size padded matrix as required by CUDA
+        # Initialize the cost to the very large value INF
         padded_cost = torch.full((B, self._MAX_ROWS, self._MAX_COLS), 1e20,
                                  device=device, dtype=torch.float32)
         padded_cost[:, :T1, :T2] = cost
 
-        # 记录实际列数
+        # Record the actual number of columns
         Ns = torch.full((B,), T2, dtype=torch.int32, device=device)
 
-        # 3. 调用高效 GPU 匹配
-        # output 形状 [B, _MAX_COLS, 2], 其中第 2 列是匹配到的 features2 索引
+        # 3. Invoke the efficient GPU matching
+        # output shape [B, _MAX_COLS, 2], where the 2nd column is the matched features2 index
         with torch.no_grad():
             output = hungarian_gpu(padded_cost, Ns)
-            # 我们只需要 features1 对应的 T1 行
-            # output[:, :, 1] 存储的是 features1 每行对应的 features2 的列索引
+            # We only need the T1 rows corresponding to features1
+            # output[:, :, 1] stores, for each row of features1, the column index of the matched features2
             matched_indices = output[:, :T1, 1].long()
 
-        # 4. 计算匹配对的平均损失
-        # 通过索引从原始 sim 矩阵中提取相似度值
+        # 4. Compute the average loss over matched pairs
+        # Extract similarity values from the original sim matrix via indexing
         matched_sim = torch.gather(sim, dim=2, index=matched_indices.unsqueeze(-1)).squeeze(-1)
 
         # Loss = 1 - Mean(CosineSimilarity)

@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/road3d.png" alt="ROAD overview" width="100%">
+  <img src="assets/000.png" alt="ROAD overview" width="100%">
 </p>
 
 ROAD transfers discriminative 3D semantics into shape generation through
@@ -40,16 +40,17 @@ The following textured GLBs are rendered as 360-degree turntables.
 <table>
   <tr>
     <td align="center"><img src="assets/turntables/001.gif" width="280"><br><sub>001 · Bread man</sub></td>
-    <td align="center"><img src="assets/turntables/007.gif" width="280"><br><sub>007 · Cat</sub></td>
-    <td align="center"><img src="assets/turntables/017.gif" width="280"><br><sub>017 · Food bowl</sub></td>
+    <td align="center"><img src="assets/turntables/002.gif" width="280"><br><sub>002 · Cat</sub></td>
+    <td align="center"><img src="assets/turntables/003.gif" width="280"><br><sub>003 · Food bowl</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/turntables/020.gif" width="280"><br><sub>020 · Fire hydrant</sub></td>
-    <td align="center"><img src="assets/turntables/029.gif" width="280"><br><sub>029 · Aircraft</sub></td>
-    <td align="center"><img src="assets/turntables/031.gif" width="280"><br><sub>031 · Castle</sub></td>
+    <td align="center"><img src="assets/turntables/004.gif" width="280"><br><sub>004 · Fire hydrant</sub></td>
+    <td align="center"><img src="assets/turntables/005.gif" width="280"><br><sub>005 · Aircraft</sub></td>
+    <td align="center"><img src="assets/turntables/006.gif" width="280"><br><sub>006 · Castle</sub></td>
   </tr>
 </table>
 
+[Browse all 34 examples, conditioning images, and textured GLBs](assets/showcase/README.md).
 
 ## Installation
 
@@ -145,9 +146,9 @@ GPU_IDS=0 bash scripts/train_baseline.sh data.root_dir=/path/to/3d_data
 evaluation_data/
 ├── manifest.json
 ├── images/
-│   └── <uid>/013.png
+│   └── <uid>/eval.png
 └── meshes/
-    └── <uid>/013.glb
+    └── <uid>/eval.glb
 ```
 
 `manifest.json` is a JSON list of UIDs shared by the image and mesh roots.

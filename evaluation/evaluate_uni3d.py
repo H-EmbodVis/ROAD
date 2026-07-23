@@ -53,7 +53,11 @@ def parse_args():
     parser.add_argument("--uni3d-checkpoint", default=None)
     parser.add_argument("--openclip-checkpoint", required=True)
     parser.add_argument("--openclip-model", default="EVA02-E-14-plus")
-    parser.add_argument("--view", default="013")
+    parser.add_argument(
+        "--view",
+        default="eval",
+        help="Filename stem shared by <uid>/<view>.png and <uid>/<view>.glb",
+    )
     parser.add_argument("--npoints", type=int, default=8192)
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--missing-glb", choices=("zero", "skip"), default="zero")

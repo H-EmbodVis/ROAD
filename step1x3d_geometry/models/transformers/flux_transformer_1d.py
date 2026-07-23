@@ -58,28 +58,28 @@ def build_mlp(hidden_size, projector_dim, z_dim):
 
 def extract_denoiser_model(ckpt, output_path=None):
     """
-    从ckpt字典中提取以denoiser_model为起始的参数，并去除键中的denoiser_model前缀
+    Extract parameters that start with denoiser_model from the ckpt dictionary, and remove the denoiser_model prefix from the keys.
 
-    参数:
-        ckpt: 已加载的ckpt参数字典
-        output_path: 处理后的参数保存路径，若为None则不保存
-    返回:
-        处理后的参数字典
+    Args:
+        ckpt: The loaded ckpt parameter dictionary.
+        output_path: Path to save the processed parameters; if None, they are not saved.
+    Returns:
+        The processed parameter dictionary.
     """
-    # 提取以"denoiser_model"为起始的键值对
+    # Extract the key-value pairs that start with "denoiser_model"
     denoiser_params = {}
     prefix = "denoiser_model."
 
     for key, value in ckpt.items():
         if key.startswith(prefix):
-            # 去除前缀
+            # Remove the prefix
             new_key = key[len(prefix):]
             denoiser_params[new_key] = value
 
-    # 如果指定了输出路径，则保存处理后的参数
+    # If an output path is specified, save the processed parameters
     if output_path is not None:
         torch.save(denoiser_params, output_path)
-        print(f"已将处理后的参数保存至: {output_path}")
+        print(f"Saved the processed parameters to: {output_path}")
 
     return denoiser_params
 
