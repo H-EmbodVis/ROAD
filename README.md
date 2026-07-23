@@ -1,12 +1,6 @@
 # ROAD: Reciprocal-Objective Alignment of Discriminative Semantics for 3D Shape Generation
 
-<p align="center">
-  <a href="https://github.com/LMD0311"><strong>Xin Zhou</strong></a>
-  &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://github.com/jerryfeng2003"><strong>Tianrui Feng</strong></a>
-  &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://github.com/dk-liang"><strong>Dingkang Liang</strong></a>
-</p>
+
 
 <p align="center">
   Xiao Luo<sup>1</sup> &nbsp;&nbsp;
