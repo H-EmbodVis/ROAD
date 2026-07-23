@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ROAD transfers discriminative 3D foundation-model priors into diffusion transformers for efficient, high-fidelity 3D shape generation.">
+  <meta name="description" content="ROAD transfers discriminative 3D foundation-model priors into diffusion transformers for efficient, high-fidelity 3D shape generation. Code, training, evaluation, and interactive results are available.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:title" content="ROAD — Efficient 3D Shape Generation">
   <meta property="og:description" content="Reciprocal-Objective Alignment of Discriminative Semantics for 3D Shape Generation.">
@@ -18,13 +18,12 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" id="top">
     <div class="nav-shell">
-      <a class="brand" href="#top" aria-label="ROAD home">
-        <span class="brand-mark">R</span><span>ROAD</span>
-      </a>
+      <a class="brand" href="#top" aria-label="ROAD home"><span class="brand-mark">R</span><span>ROAD</span></a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#code">Code</a>
         <a href="#gallery">3D Gallery</a>
         <a href="#citation">Citation</a>
       </nav>
@@ -36,6 +35,7 @@
     <section class="hero section-shell">
       <div class="hero-glow hero-glow-a"></div>
       <div class="hero-glow hero-glow-b"></div>
+      <p class="release-pill"><span></span> Open-source training & evaluation code available</p>
       <p class="eyebrow">Efficient high-fidelity 3D generation</p>
       <h1><span>ROAD</span></h1>
       <p class="hero-subtitle">Reciprocal-Objective Alignment of Discriminative Semantics<br class="desktop-break"> for 3D Shape Generation</p>
@@ -49,7 +49,7 @@
       <div class="hero-actions">
         <a class="button button-primary" href="./assets/paper/ROAD.pdf" target="_blank">Paper <span>PDF</span></a>
         <a class="button button-secondary" href="https://github.com/LuoMayao/ROAD3D" target="_blank" rel="noreferrer">Code <span>GitHub</span></a>
-        <a class="button button-ghost" href="#gallery">Explore 3D <span>↓</span></a>
+        <a class="button button-ghost" href="#code">Quick start <span>↓</span></a>
       </div>
 
       <figure class="hero-figure media-card">
@@ -78,21 +78,9 @@
         <p>Direct token-wise transfer is difficult because generative latents are holistic and order-agnostic, while discriminative 3D tokens preserve localized geometry. ROAD bridges this semantic-structural heterogeneity with two complementary objectives: global semantic condensation and permutation-invariant structural matching.</p>
       </div>
       <div class="concept-cards">
-        <article>
-          <span class="card-index">01</span>
-          <h3>Holistic Semantic Condensing</h3>
-          <p>Condenses unordered features into a global semantic anchor, guiding the model toward the correct high-level shape manifold—<em>what to generate</em>.</p>
-        </article>
-        <article>
-          <span class="card-index">02</span>
-          <h3>Structural Optimal Alignment</h3>
-          <p>Uses similarity-based Hungarian matching to align two unordered token sets and supervise fine geometric details—<em>how to generate them</em>.</p>
-        </article>
-        <article>
-          <span class="card-index">03</span>
-          <h3>Training-only supervision</h3>
-          <p>The 3D foundation model is frozen and used only during training. The deployed generator keeps the original inference path and cost.</p>
-        </article>
+        <article><span class="card-index">01</span><h3>Holistic Semantic Condensing</h3><p>Condenses unordered features into a global semantic anchor, guiding the model toward the correct high-level shape manifold—<em>what to generate</em>.</p></article>
+        <article><span class="card-index">02</span><h3>Structural Optimal Alignment</h3><p>Uses similarity-based Hungarian matching to align two unordered token sets and supervise fine geometric details—<em>how to generate them</em>.</p></article>
+        <article><span class="card-index">03</span><h3>Training-only supervision</h3><p>The 3D foundation model is frozen and used only during training. The deployed generator keeps the original inference path and cost.</p></article>
       </div>
     </section>
 
@@ -105,16 +93,9 @@
         <img src="./assets/figures/pipeline.webp" alt="ROAD training pipeline with Holistic Semantic Condensing and Structural Optimal Alignment" loading="lazy">
         <figcaption>Overview of ROAD. HSC provides global semantic consistency; SOA builds a cost matrix and performs Hungarian matching for token-level alignment.</figcaption>
       </figure>
-
       <div class="representation-grid">
-        <div>
-          <p class="eyebrow">Why naive alignment fails</p>
-          <h3>Generative and discriminative 3D tokens encode different structures.</h3>
-          <p>VAE latents aggregate global surface context and are permutation invariant. 3DFM tokens are formed from local point-cloud neighborhoods. ROAD explicitly respects this mismatch instead of assuming rigid positional correspondence.</p>
-        </div>
-        <figure class="media-card zoomable">
-          <img src="./assets/figures/representation-gap.webp" alt="Comparison between VAE global-context features and 3D foundation-model local features" loading="lazy">
-        </figure>
+        <div><p class="eyebrow">Why naive alignment fails</p><h3>Generative and discriminative 3D tokens encode different structures.</h3><p>VAE latents aggregate global surface context and are permutation invariant. 3DFM tokens are formed from local point-cloud neighborhoods. ROAD explicitly respects this mismatch instead of assuming rigid positional correspondence.</p></div>
+        <figure class="media-card zoomable"><img src="./assets/figures/representation-gap.webp" alt="Comparison between VAE global-context features and 3D foundation-model local features" loading="lazy"></figure>
       </div>
     </section>
 
@@ -128,18 +109,10 @@
           <img src="./assets/figures/efficiency.webp" alt="ROAD efficiency overview and comparison of training data, performance, and GPU hours" loading="lazy">
           <figcaption>ROAD sits on a strong computation-performance frontier using 30K public shapes and 8 A100 GPUs.</figcaption>
         </figure>
-
         <div class="results-grid">
-          <figure class="media-card zoomable">
-            <img src="./assets/figures/convergence.webp" alt="Convergence curve showing ROAD reaching the baseline peak 2.4 times faster" loading="lazy">
-            <figcaption><strong>2.4× faster:</strong> ROAD reaches the baseline peak around 55K iterations instead of 130K.</figcaption>
-          </figure>
-          <figure class="media-card zoomable">
-            <img src="./assets/figures/classification.webp" alt="Linear classification accuracy across diffusion transformer layers" loading="lazy">
-            <figcaption>Aligned intermediate features exhibit substantially stronger discriminative semantics.</figcaption>
-          </figure>
+          <figure class="media-card zoomable"><img src="./assets/figures/convergence.webp" alt="Convergence curve showing ROAD reaching the baseline peak 2.4 times faster" loading="lazy"><figcaption><strong>2.4× faster:</strong> ROAD reaches the baseline peak around 55K iterations instead of 130K.</figcaption></figure>
+          <figure class="media-card zoomable"><img src="./assets/figures/classification.webp" alt="Linear classification accuracy across diffusion transformer layers" loading="lazy"><figcaption>Aligned intermediate features exhibit substantially stronger discriminative semantics.</figcaption></figure>
         </div>
-
         <div class="qualitative-grid">
           <figure class="media-card zoomable"><img src="./assets/figures/geometry.webp" alt="Geometry comparison with prior 3D generation methods" loading="lazy"><figcaption>Geometry comparison: ROAD preserves finer shape details and cleaner topology.</figcaption></figure>
           <figure class="media-card zoomable"><img src="./assets/figures/quality.webp" alt="Qualitative comparison of generated 3D assets" loading="lazy"><figcaption>Qualitative comparison across diverse inputs and categories.</figcaption></figure>
@@ -147,12 +120,77 @@
       </div>
     </section>
 
+    <section class="content-section release-section" id="code">
+      <div class="section-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Open-source release</p><h2>Reproduce the baseline, ROAD training, and evaluation.</h2></div>
+          <p>The public repository removes private experiment branches and machine-specific paths while preserving the released baseline and Uni3D-REPA objectives. Model weights and full training datasets are distributed separately.</p>
+        </div>
+
+        <figure class="media-card release-overview zoomable">
+          <img src="./assets/release/overview.png" alt="ROAD open-source release overview with representative generated assets" loading="lazy">
+          <figcaption>The source release includes portable configurations, launch scripts, evaluation entry points, and qualitative results.</figcaption>
+        </figure>
+
+        <div class="release-feature-grid">
+          <article><span class="code-path">configs/baseline.yaml</span><h3>Step1X-3D baseline</h3><p>Rectified-flow training with the released VAE and DINOv2 visual encoder.</p></article>
+          <article><span class="code-path">configs/uni3d_repa.yaml</span><h3>ROAD / Uni3D-REPA</h3><p>Frozen Uni3D teacher, global cosine alignment, and token-level Hungarian matching.</p></article>
+          <article><span class="code-path">scripts/evaluate.sh</span><h3>Uni3D-I + ULIP-I</h3><p>Portable evaluation entry points with JSON outputs for both metrics.</p></article>
+        </div>
+
+        <div class="environment-row" aria-label="Tested training environment">
+          <span>Python 3.10</span><span>PyTorch 2.5.1</span><span>CUDA 11.8</span><span>flash-attn 2.8.3</span><span>OmegaConf overrides</span>
+        </div>
+
+        <div class="quickstart-grid">
+          <article class="terminal-card">
+            <div class="terminal-title"><span></span><span></span><span></span><b>Install</b><button class="copy-code" type="button" data-copy="installCode">Copy</button></div>
+            <pre><code id="installCode">conda env create -f environment.yml
+conda activate step1x
+pip install -r requirements.txt
+pip install flash-attn==2.8.3 --no-build-isolation</code></pre>
+          </article>
+          <article class="terminal-card">
+            <div class="terminal-title"><span></span><span></span><span></span><b>Train ROAD</b><button class="copy-code" type="button" data-copy="trainCode">Copy</button></div>
+            <pre><code id="trainCode"># Single GPU
+GPU_IDS=0 bash scripts/train_uni3d_repa.sh
+
+# Multi-GPU, one node
+GPU_IDS=0,1,2,3 bash scripts/train_uni3d_repa.sh</code></pre>
+          </article>
+          <article class="terminal-card terminal-wide">
+            <div class="terminal-title"><span></span><span></span><span></span><b>Evaluate Uni3D-I and ULIP-I</b><button class="copy-code" type="button" data-copy="evalCode">Copy</button></div>
+            <pre><code id="evalCode">conda activate driveuni3d
+GPU_IDS=0,1 bash scripts/evaluate.sh \
+  evaluation_data/manifest.json \
+  evaluation_data/images \
+  evaluation_data/meshes \
+  outputs/evaluation</code></pre>
+          </article>
+        </div>
+
+        <div class="release-note">
+          <div><strong>Before training</strong><p>Prepare the Step1X-3D VAE, DINOv2 visual encoder, Uni3D teacher, and evaluation checkpoints under <code>pretrained/</code>. Training data uses NPZ surface samples plus views 12–23.</p></div>
+          <a class="button button-primary" href="https://github.com/LuoMayao/ROAD3D#pretrained-weights" target="_blank" rel="noreferrer">Read full setup <span>README</span></a>
+        </div>
+
+        <div class="turntable-heading"><div><p class="eyebrow">Release examples</p><h3>Six 360° turntables shipped with the public snapshot.</h3></div><p>These GIFs come directly from the latest source release.</p></div>
+        <div class="turntable-grid">
+          <figure><img src="./assets/release/turntables/001.gif" alt="ROAD generated bread character turntable" loading="lazy"><figcaption>ROAD027 · Bread man</figcaption></figure>
+          <figure><img src="./assets/release/turntables/002.gif" alt="ROAD generated cat turntable" loading="lazy"><figcaption>ROAD007 · Cat</figcaption></figure>
+          <figure><img src="./assets/release/turntables/003.gif" alt="ROAD generated food bowl turntable" loading="lazy"><figcaption>ROAD017 · Food bowl</figcaption></figure>
+          <figure><img src="./assets/release/turntables/004.gif" alt="ROAD generated fire hydrant turntable" loading="lazy"><figcaption>ROAD020 · Fire hydrant</figcaption></figure>
+          <figure><img src="./assets/release/turntables/005.gif" alt="ROAD generated aircraft turntable" loading="lazy"><figcaption>ROAD029 · Aircraft</figcaption></figure>
+          <figure><img src="./assets/release/turntables/006.gif" alt="ROAD generated castle turntable" loading="lazy"><figcaption>ROAD031 · Castle</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
     <section class="content-section section-shell" id="gallery">
       <div class="section-heading split-heading">
         <div><p class="eyebrow">Interactive showcase</p><h2>Inspect ROAD outputs in 3D.</h2></div>
-        <p>Drag to rotate, scroll to zoom, or open the GLB file. Select any example below to compare its conditioning image and generated asset.</p>
+        <p>Drag to rotate, scroll to zoom, or download the GLB. Example 001 has been updated to the latest ROAD027 asset.</p>
       </div>
-
       <div class="viewer-shell">
         <div class="viewer-stage">
           <model-viewer id="modelViewer" src="./assets/showcase/001/model.glb" poster="./assets/showcase/001/preview.webp" alt="Interactive generated 3D asset" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" touch-action="pan-y">
@@ -162,7 +200,7 @@
           <div class="viewer-badge">Interactive GLB</div>
         </div>
         <aside class="viewer-info">
-          <div class="viewer-title-row"><div><p class="eyebrow">Selected example</p><h3 id="selectedTitle">Example 001</h3></div><span id="selectedIndex">01 / 06</span></div>
+          <div class="viewer-title-row"><div><p class="eyebrow">Selected example</p><h3 id="selectedTitle">ROAD027</h3></div><span id="selectedIndex">01 / 06</span></div>
           <div class="condition-frame"><img id="conditionImage" src="./assets/showcase/001/condition.webp" alt="Conditioning image for selected 3D example"></div>
           <a id="downloadModel" class="button button-secondary button-full" href="./assets/showcase/001/model.glb" download>Download GLB <span>↓</span></a>
         </aside>
@@ -178,17 +216,14 @@
     <section class="content-section citation-section" id="citation">
       <div class="section-shell citation-grid">
         <div><p class="eyebrow">Citation</p><h2>Build on ROAD.</h2><p>Please use the citation below for the current project release. Update the venue field when the final bibliographic record becomes available.</p></div>
-        <div class="code-card">
-          <button class="copy-button" id="copyCitation" type="button">Copy</button>
-          <pre><code id="citationText">@misc{luo2026road,
+        <div class="code-card"><button class="copy-button" id="copyCitation" type="button">Copy</button><pre><code id="citationText">@misc{luo2026road,
   title  = {ROAD: Reciprocal-Objective Alignment of
             Discriminative Semantics for 3D Shape Generation},
   author = {Luo, Xiao and Du, Mingyang and Zhou, Xin and
             Feng, Tianrui and Chen, Xiwu and Li, Xiaofan and
             Zhang, Jiangning and Liang, Dingkang},
   year   = {2026}
-}</code></pre>
-        </div>
+}</code></pre></div>
       </div>
     </section>
   </main>
@@ -199,7 +234,6 @@
       <div class="footer-links"><a href="./assets/paper/ROAD.pdf">Paper</a><a href="https://github.com/LuoMayao/ROAD3D">Code</a><a href="#top">Back to top ↑</a></div>
     </div>
   </footer>
-
   <dialog class="image-dialog" id="imageDialog"><button aria-label="Close image">×</button><img alt="Expanded research figure"></dialog>
 </body>
 </html>

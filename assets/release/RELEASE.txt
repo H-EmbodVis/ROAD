@@ -1,0 +1,7 @@
+ROAD open-source release snapshot
+Source archive: Step1X3D-Uni3D-REPA_slim_20260723.tar.gz
+Website package generated: 2026-07-23
+Repository: https://github.com/LuoMayao/ROAD3D
+
+The project page includes the source release overview image and six turntable GIFs.
+Model weights and full training datasets are not included in the source snapshot.
