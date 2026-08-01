@@ -1,9 +1,7 @@
 # ROAD: Reciprocal-Objective Alignment of Discriminative Semantics for 3D Shape Generation
 
-
-
 <p align="center">
-  Xiao Luo<sup>1</sup> &nbsp;&nbsp;
+  <a href="https://github.com/LuoMayao">Xiao Luo</a><sup>1</sup> &nbsp;&nbsp;
   Mingyang Du<sup>1</sup> &nbsp;&nbsp;
   <a href="https://github.com/LMD0311">Xin Zhou</a><sup>1</sup> &nbsp;&nbsp;
   <a href="https://github.com/jerryfeng2003">Tianrui Feng</a><sup>1</sup><br>
@@ -22,6 +20,12 @@
 </p>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2607.28581">Paper</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://h-embodvis.github.io/ROAD/">Project Page</a>
+</p>
+
+<p align="center">
   <a href="assets/000.pdf">
     <img src="assets/000.webp" alt="ROAD overview" width="100%">
   </a>
@@ -37,7 +41,7 @@ code and configurations for:
 
 Model weights and full training datasets are not included.
 
-## 3D results
+## 3D Results
 
 The following textured GLBs are rendered as 360-degree turntables.
 
@@ -106,7 +110,7 @@ Training uses its own Uni3D subset under `training/uni3d/`; Uni3D-I uses the
 separate inference subset under `evaluation/uni3d/`. Both select point groups
 with farthest-point sampling.
 
-## Pretrained weights
+## Pretrained Weights
 
 Prepare the following files:
 
@@ -133,7 +137,7 @@ evaluation checkpoints are used by Uni3D-I and ULIP-I. See
 
 ## Data
 
-### Training data
+### Training Data
 
 ```text
 data/3d_data/
@@ -154,13 +158,17 @@ Each split is a JSON list of UIDs. Each NPZ file contains `surface` and
 used during training. A small synthetic dataset for checking the complete
 pipeline is included at `data/demo_3d_data`.
 
+For details on mesh preprocessing and dataset preparation, please refer to the
+data preprocessing pipeline provided by
+[Step1X-3D](https://github.com/stepfun-ai/Step1X-3D).
+
 Use another dataset root with an OmegaConf override:
 
 ```bash
 GPU_IDS=0 bash scripts/train_baseline.sh data.root_dir=/path/to/3d_data
 ```
 
-### Evaluation data
+### Evaluation Data
 
 ```text
 evaluation_data/
@@ -270,7 +278,7 @@ TensorBoard logs with:
 tensorboard --logdir outputs
 ```
 
-## License and attribution
+## License and Attribution
 
 The Step1X-3D-derived training code is distributed under Apache License 2.0.
 The reduced Uni3D subsets under `training/uni3d/` and `evaluation/uni3d/`
@@ -281,7 +289,28 @@ See `LICENSE`, `NOTICE`, `MODIFICATIONS.md`, `training/uni3d/LICENSE`,
 `evaluation/uni3d/LICENSE`, and `evaluation/LICENSE-ULIP`. Model weights and
 external datasets are distributed separately under their respective terms.
 
-Please also cite and acknowledge
+## Acknowledgement
+
+This project builds upon
 [Step1X-3D](https://github.com/stepfun-ai/Step1X-3D),
 [Uni3D](https://github.com/baaivision/Uni3D), and
 [ULIP](https://github.com/salesforce/ULIP).
+We thank the authors of these projects for their contributions to the
+open-source community.
+
+## Citation
+
+If you find this repository useful for your research, please consider citing
+our paper:
+
+```bibtex
+@misc{luo2026roadreciprocalobjectivealignmentdiscriminative,
+  title         = {ROAD: Reciprocal-Objective Alignment of Discriminative Semantics for 3D Shape Generation},
+  author        = {Xiao Luo and Mingyang Du and Xin Zhou and Tianrui Feng and Xiwu Chen and Xiaofan Li and Jiangning Zhang and Dingkang Liang},
+  year          = {2026},
+  eprint        = {2607.28581},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2607.28581}
+}
+```
