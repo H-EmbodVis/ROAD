@@ -20,9 +20,11 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.28581">Paper</a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://h-embodvis.github.io/ROAD/">Project Page</a>
+  <a href="https://arxiv.org/abs/2607.28581"><img src="https://img.shields.io/badge/arXiv-2607.28581-b31b1b.svg" alt="Paper"></a>
+  &nbsp;&nbsp;
+  <a href="https://h-embodvis.github.io/ROAD/"><img src="https://img.shields.io/badge/Project-Website-orange" alt="Project Page"></a>
+  &nbsp;&nbsp;
+  <a href="https://huggingface.co/H-EmbodVis/ROAD"><img src="https://img.shields.io/badge/Hugging%20Face-Model-yellow" alt="Hugging Face"></a>
 </p>
 
 <p align="center">
