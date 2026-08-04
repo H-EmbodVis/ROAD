@@ -15,7 +15,7 @@
   <sup>1</sup>Huazhong University of Science and Technology, China<br>
   <sup>2</sup>Megvii, China &nbsp;&nbsp;
   <sup>3</sup>Zhejiang University, China<br>
-  <code>{dkliang, tianruifeng, xzhou03}@hust.edu.cn</code><br>
+  <code>{mayaoluo, dkliang}@hust.edu.cn</code><br>
   <sup>*</sup>Corresponding author
 </p>
 
